@@ -5,10 +5,12 @@ using UnityEngine;
 public class Spanw_Manager : MonoBehaviour
 {
     public GameObject obstalePrefab;
-    private Vector3 spawnPos = new Vector3(35, 0, 0);
+    private Vector3 spawnPos = new Vector3(30, 0, 0);
+    public GameObject[] obstacles;
+    public int obstaclesindex;
 
-    private float startDelay = 2;
-    private float repeatRate = 2;
+    private float startDelay = 1.5f;
+    private float repeatRate = 0.7f;
     
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class Spanw_Manager : MonoBehaviour
 
     void SpawnObstacle()
     {
-        Instantiate(obstalePrefab, spawnPos, obstalePrefab.transform.rotation);
+        int obstaclesindex = Random.Range(0, obstacles.Length);
+        Instantiate(obstacles[obstaclesindex], spawnPos, obstalePrefab.transform.rotation);
     }
 }
