@@ -11,11 +11,14 @@ public class Spanw_Manager : MonoBehaviour
 
     private float startDelay = 1.5f;
     private float repeatRate = 0.7f;
+
+    private Player_Controler Player_ControlerScript;
     
     // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+        Player_ControlerScript = GameObject.Find("Player").GetComponent<Player_Controler>();
     }
 
     // Update is called once per frame
@@ -26,7 +29,10 @@ public class Spanw_Manager : MonoBehaviour
 
     void SpawnObstacle()
     {
-        int obstaclesindex = Random.Range(0, obstacles.Length);
-        Instantiate(obstacles[obstaclesindex], spawnPos, obstalePrefab.transform.rotation);
+        if (!Player_ControlerScript.isGameOver)
+        {
+            int obstaclesindex = Random.Range(0, obstacles.Length);
+            Instantiate(obstacles[obstaclesindex], spawnPos, obstalePrefab.transform.rotation);
+        }
     }
 }
