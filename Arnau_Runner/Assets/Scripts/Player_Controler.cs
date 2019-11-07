@@ -12,6 +12,8 @@ public class Player_Controler : MonoBehaviour
     public bool IsOnGround = true;
     public bool isGameOver = false;
 
+    private Animator playerAim;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class Player_Controler : MonoBehaviour
         playerRB.AddForce(Vector3.up * 500);
 
         Physics.gravity *= GravityModifier;
+
+        playerAim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,6 +32,7 @@ public class Player_Controler : MonoBehaviour
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             IsOnGround = false;
+            playerAim.SetTrigger("Jump_trig");
         } 
     }
 
