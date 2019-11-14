@@ -193,7 +193,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -323,14 +323,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cdd2b07cff9e247a30d42ffd156e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstalePrefab: {fileID: 7180445420528727238, guid: d51163edd48f7f94ea8eb72e2a9026f7,
-    type: 3}
   obstacles:
   - {fileID: 7180445420528727238, guid: d51163edd48f7f94ea8eb72e2a9026f7, type: 3}
   - {fileID: 6575046077151087759, guid: 373da4c960bbb334d8363ebf66bda737, type: 3}
   - {fileID: 787674931456342825, guid: be5ad4cf3d70e6948afc5b86be39f8c1, type: 3}
   - {fileID: 703793233974462449, guid: b6afc23511155bb4e817eb18d8c6c062, type: 3}
   obstaclesindex: 0
+  obstacleDestroyedCount: 0
 --- !u!4 &630075050
 Transform:
   m_ObjectHideFlags: 0
@@ -485,8 +484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 40
-  GravityModifier: 20
-  IsOnGround: 1
+  GravityModifier: 17
+  IsOnGround: 0
   isGameOver: 0
 --- !u!65 &1108838076
 BoxCollider:
@@ -666,15 +665,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: b186f9485a0828b468f98fe846ae1a68, type: 3}
       propertyPath: m_Controller
