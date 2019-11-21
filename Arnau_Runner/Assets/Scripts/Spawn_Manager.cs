@@ -10,7 +10,7 @@ public class Spawn_Manager : MonoBehaviour
     public int obstaclesindex;
     public int obstacleDestroyedCount;
 
-    private float startDelay = 1.25f;
+    private float startDelay = 2;
     private float repeatRate = 0.8f;
 
     private Player_Controler Player_ControlerScript;
