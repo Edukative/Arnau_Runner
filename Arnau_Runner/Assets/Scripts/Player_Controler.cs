@@ -12,6 +12,12 @@ public class Player_Controler : MonoBehaviour
     public bool IsOnGround = true;
     public bool isGameOver = false;
 
+    public int hp;
+
+    private SpriteRenderer hp1;
+    private SpriteRenderer hp2;
+    private SpriteRenderer hp3;
+
     private Animator playerAim;
 
     public ParticleSystem explosion;
@@ -33,12 +39,17 @@ public class Player_Controler : MonoBehaviour
 
         playerAim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+
+        GameObject canvas = GameObject.Find("Canvas");
+        hp1 = canvas.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        hp2 = canvas.transform.GetChild(1).GetComponent<SpriteRenderer>();
+        hp3 = canvas.transform.GetChild(2).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-      if (Input.GetKeyDown(KeyCode.Mouse1) && IsOnGround && !isGameOver)
+                if (Input.GetKeyDown(KeyCode.Mouse1) && IsOnGround && !isGameOver)
         {
             playerRB.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             IsOnGround = false;
@@ -50,7 +61,37 @@ public class Player_Controler : MonoBehaviour
             playerAudio.PlayOneShot(jumpSound);
         } 
     }
+    void LoseHP()
+    {
+        if (hp >= 0)
+        {
+            hp--;
+            switch (hp)
+            {
+                case 2: hp3.gameObject.SetActive(false);
+                    break;
+                case 1: hp2.gameObject.SetActive(false);
+                    break;
+                case 0:
+                    hp1.gameObject.SetActive(false);
+                    isGameOver = true;
 
+                    playerAim.SetBool("Death_b", true);
+                    playerAim.SetInteger("DeathType_int", 1);
+
+                    explosion.Play();
+                    dirt.Stop();
+
+                    playerAudio.PlayOneShot(crashSound);
+
+                    break;
+                default: hp3.gameObject.SetActive(true);
+                         hp2.gameObject.SetActive(true);
+                         hp1.gameObject.SetActive(true);
+                    break;
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))//if the player collides with yeh ground
@@ -60,14 +101,10 @@ public class Player_Controler : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))//or the player collides with an obstacle        
         {
-
-            explosion.Play();
-            isGameOver = true; 
-            Debug.Log("Game Over you noob");
-            playerAim.SetBool("Death_b", true);
-            playerAudio.PlayOneShot(crashSound);
-            playerAim.SetInteger("DeathType_int", 1);
+            LoseHP();
+            Destroy(collision.gameObject);
         }
     }
 
+    
 }
