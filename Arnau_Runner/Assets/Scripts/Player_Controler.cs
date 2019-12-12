@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class Player_Controler : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player_Controler : MonoBehaviour
 
     public bool IsOnGround = true;
     public bool isGameOver = false;
+    public bool restart = false;
 
     public int hp;
 
@@ -60,6 +62,15 @@ public class Player_Controler : MonoBehaviour
 
             playerAudio.PlayOneShot(jumpSound);
         } 
+                
+                else if (isGameOver && Input.GetKeyDown(KeyCode.Space))
+        {
+            isGameOver = false;
+            restart = true;
+            hp = 4;
+            LoseHP();
+            playerAim.SetBool("Death_b", false);
+        }
     }
     void LoseHP()
     {
